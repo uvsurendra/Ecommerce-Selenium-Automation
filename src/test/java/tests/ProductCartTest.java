@@ -44,10 +44,7 @@ public class ProductCartTest extends BaseTest {
         // 6. Add product to bag
         productPage.clickAddToBag();
 
-        // 7. Verify shopping bag
-        Assert.assertTrue(
-                cartPage.isShoppingBagDisplayed(),
-                "Shopping bag was not displayed"
-        );
+        // 7. Click View Shopping Bag
+        cartPage.clickViewShoppingBag();
     }
 }

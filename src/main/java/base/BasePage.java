@@ -14,6 +14,7 @@ public class BasePage {
     protected WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
+
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     }
@@ -47,5 +48,29 @@ public class BasePage {
         return wait.until(
                 ExpectedConditions.visibilityOfElementLocated(locator)
         ).isDisplayed();
+    }
+
+    protected void acceptConsentIfPresent() {
+
+        try {
+
+            WebDriverWait shortWait =
+                    new WebDriverWait(driver, Duration.ofSeconds(5));
+
+            WebElement consentButton =
+                    shortWait.until(
+                            ExpectedConditions.elementToBeClickable(
+                                    By.cssSelector(
+                                            "button[data-url*='ConsentTracking-SetConsent'][data-url*='consent=true']"
+                                    )
+                            )
+                    );
+
+            consentButton.click();
+
+        } catch (Exception e) {
+
+            // Consent popup is not displayed
+        }
     }
 }
